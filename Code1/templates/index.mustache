@@ -1,0 +1,28 @@
+Ola {{nome}}
+<body>
+    <div id="container">
+    	<h3>{{lista_users_h3}}</h3>
+    	<div>
+    		<table>
+    			<thead>
+    				<tr>
+    					<th>ID</th>
+    					<th>NOME</th>
+    					<th>EMAIL</th>
+    				</tr>
+    			</thead>
+    			<tbody>
+    				{{#listaUsers}}
+    				<tr> 
+    					<td>{{id}}</td>
+    					<td>{{nome}}</td>
+    					<td>{{email}}</td>
+    				</tr>
+    				{{/listaUsers}}
+    			</tbody>
+    		</table>
+    		<p>{{{links}}}</p>
+    		<p>{p_string}</p>
+    	</div>
+    </div>
+</body>
