@@ -1,0 +1,24 @@
+
+
+		<div id="container">
+			<h1>{{header_h1}}</h1>
+			<div>
+				<table>
+					<thead>
+						<tr>
+							<th>NOME</th>
+							<th>Especialidade</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#listaMedicos}}
+						<tr> 
+							<td>{{nome}}</td>
+							<td>{{especialidade}}</td>
+						</tr>
+						{{/listaMedicos}}
+					</tbody>
+				</table>
+				<p>{{{links}}}</p>
+			</div>
+		</div>

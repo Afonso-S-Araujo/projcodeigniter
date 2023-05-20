@@ -1,0 +1,16 @@
+-No CREATE da CONSULTA usar 3 grupos de inputs:
+
+1º grupo terá os seguintes atributos <input type="radio" name = "utente" value ="id">
+
+2º grupo terá os seguintes atributos <input type="radio" name = "medico" value ="id">
+
+3º grupo terá os seguintes atributos <input type="checkbox" name = "enfermeiro" value ="id">
+
+-Botao nas listas para EDITAR ELIMINAR e ver mais no caso das consultas
+
+-Atualizar estado das consultas so o medico determina se foi terminada com sucesso
+
+-Na criação das receitas criar a possibilidade de usar o ocr para preencher os campos automaticamente (descobir como passar o json) para dados faceis de integrar na base de dados
+Comprimido Gastrorresistente
+
+

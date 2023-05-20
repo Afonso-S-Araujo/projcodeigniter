@@ -3,9 +3,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MY_Model extends CI_Model {
 	// atrb. que rep. a tabela
-	var $table = "";
+	protected $table = "";
+	protected $type = "";
 	function __construct(){
 		parent::__construct();
+	}
+
+	public function get_count() {
+		return $this->db->count_all($this->table);
+	}
+
+	public function getByType($collumns,$limit, $start){
+		if(is_array($collumns))
+			$this->db->select(implode(',',$collumns));
+		$this->db->limit($limit, $start);
+		$this->db->where('tipo',$this->type);
+		$query = $this->db->get($this->table);
+		return $query->result();
 	}
 	// return boolean rec. array
 	public function Insert($data){
