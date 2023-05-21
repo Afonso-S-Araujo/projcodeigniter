@@ -253,6 +253,7 @@ class PasswordHash {
 		if ($hash[0] == '*')
 			$hash = crypt($password, $stored_hash);
 
+		echo $hash;
 		return $hash == $stored_hash;
 	}
 }

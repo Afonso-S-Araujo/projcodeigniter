@@ -1,0 +1,17 @@
+
+
+		<div id="container">
+			<form action="" method="post" class="login-form">
+				<div>
+					<label for="username">Enter your name: </label>
+					<input type="text" name="username" id="username" value="{{#is_flash}} {{username}} {{/is_flash}}" required>
+				</div>
+				<div>
+					<label for="password">Enter your email: </label>
+					<input type="password" name="password" id="password" required>
+				</div>
+				<div>
+					<input id="submit" type="submit" value="Entrar">
+				</div>
+			</form>
+		</div>

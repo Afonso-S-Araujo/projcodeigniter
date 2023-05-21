@@ -11,8 +11,6 @@ class Medicos extends MY_Controller {
 		$this->load->model('Medicos_model');
 
 		$this->data['title'] = "Medicos";
-		$this->data['css'] = base_url("resources/css/home.css");
-		$this->data['imgNav'] = base_url("resources/img/crossbig.png");
 	}
 	
 	
@@ -29,20 +27,26 @@ class Medicos extends MY_Controller {
 		//$collumns = array();
 
 		//verificação de login muda o select
-		if(!$this->login->isLoggedIn())
+		$logged = $this->login->isLoggedIn();
+		if(!$logged){
+			$jointable = false;
+			$jointableCols = "";
 			$collumns = array('nome','especialidade');
-		else
+		}else{			
+			$jointable = 'morada';
+			$jointableCols = array('cidade');
 			$collumns = '*';
-		$listaMedicos = $this->Medicos_model->getByType($collumns,$config['per_page'],$page);
+		}
+		$listaMedicos = $this->Medicos_model->getByType($jointableCols,$jointable,$collumns,$config['per_page'],$page);
 		//para o template
 		$data = [
 	        'header_h1' => 'Medicos',
 	        'listaMedicos' => $listaMedicos,
 	        'links' => $this->pagination->create_links()
 	    ];
-		print_r($listaMedicos);
+		//print_r($listaMedicos);
 		$this->data = array_merge($this->data,$data);
-		$this->data['isLoggedIn'] = $this->login->isLoggedIn();
+		$this->data['isLoggedIn'] = $logged;
 		$this->mustache->render('medicos',$this->data);
 		
 	}
