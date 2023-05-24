@@ -13,8 +13,8 @@ class Root extends MY_Controller {
 	
 	
 	public function index(){
-		//print_r($this->data);
-		$this->data['imgNav'] = base_url("resources/img/crossbig.png");
+		
+		$this->data['imgHome'] = base_url("resources/img/hospital.jpg");
 		$this->data['isLoggedIn'] = $this->login_lib->islogged;
 		$this->mustache->render('home',$this->data);
 		

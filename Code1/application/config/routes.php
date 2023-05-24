@@ -59,13 +59,18 @@ $route['enfermeiros/(:num)'] = 'enfermeiros/index/$1';
 
 $route['utentes/(:num)'] = 'utentes/index/$1';
 
+$route['consultas/(:num)'] = 'Consulta/index/$1';
+
 $route['home'] = 'Root';
 //login
 $route['login'] = 'Login/login';
 $route['logout'] = 'Login/logout';
 
+
+
+$route['consulta_enfermeiro/(:num)/(:num)'] = 'Consulta/get_enf/$1/$2';
 $route['email'] = 'Email';
 
 $route['emailsend'] = 'Email/send';
-// Pagination
-$route['clientes/(:num)'] = "Clientes";
+
+

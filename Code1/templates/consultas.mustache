@@ -6,29 +6,29 @@
 				<table>
 					<thead>
 						<tr>
-							<th>NOME</th>
+							<th>Data</th>
+							<th>Hora</th>
+							<th>Medico</th>							
 							<th>Especialidade</th>
-							{{#isLoggedIn}}
-								<th>nif</th>
-								<th>nib</th>
-								<th>morada</th>
-							{{/isLoggedIn}}
+							<th>Utente</th>
+							<th>Enfermeiros</th>						
+							<th>Receitas</th>						
 						</tr>
 					</thead>
 					<tbody>
 						{{#lista}}
 						<tr> 
-							<td>{{nome}}</td>
-							<td>{{especialidade}}</td>
-							{{#isLoggedIn}}
-								<td>{{nif}}</td>
-								<td>{{nib}}</td>
-								<td>{{cidade}}</td>
-							{{/isLoggedIn}}
+							<td>{{data}}</td>
+							<td>{{hora}}</td>
+							<td>{{nomeMedico}}</td>							
+							<td>{{especialidade}}</td>	
+							<td>{{nomeUtente}}</td>						
+							<td><a href="{{enfermeirosList}}">ver enfermeiros</a></td>							
+							<td><a href="{{receitas}}">ver receitas</a></td>
 						</tr>
 						{{/lista}}
 					</tbody>
 				</table>
-				<p>{{{links}}}</p>
+				<p class="links">{{{links}}}</p>
 			</div>
 		</div>

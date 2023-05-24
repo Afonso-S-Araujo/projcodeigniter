@@ -44,7 +44,7 @@ class Medicos extends MY_Controller {
 	        'lista' => $listaMedicos,
 	        'links' => $this->pagination->create_links()
 	    ];
-		//print_r($listaMedicos);
+		
 		$this->data = array_merge($this->data,$data);
 		$this->data['isLoggedIn'] = $this->login_lib->islogged;
 		$this->mustache->render('funcionarios',$this->data);

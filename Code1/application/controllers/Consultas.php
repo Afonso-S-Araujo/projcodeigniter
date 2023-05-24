@@ -2,7 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Consultas extends MY_Controller {
-	
+	//enfermeiros no futuro
+	private $enfs;
+
 	function __construct(){
 		parent::__construct();
 		$this->load->helper('url');
@@ -25,20 +27,31 @@ class Consultas extends MY_Controller {
 		$this->pagination->initialize($config);
 		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 		//$collumns = array();
-
+		$userdata = array();
+		if($this->login_lib->islogged)
+			$userdata = array('tipo' => $this->session->userdata('user')['tipo'],'id' =>$this->session->userdata('user')['id']);
+		
 		//verificação de login muda o select
-		$listaConsultas = $this->Consultas_model->get_consultas($this->login_lib->islogged);
+		$listaConsultas = $this->Consultas_model->get_consultas($this->login_lib->islogged,$userdata);
 		//para o template
 		$data = [
 	        'header_h1' => 'Consultas',
 	        'lista' => $listaConsultas,
 	        'links' => $this->pagination->create_links()
 	    ];
-		//print_r($listaConsultas);
+		
+		
 		$this->data = array_merge($this->data,$data);
+		
+		//foreach
+		//$this->$data['lista'][0]->enfermeirosList = base_url('consulta_enfermeiro');
 		$this->data['isLoggedIn'] = $this->login_lib->islogged;
 		$this->mustache->render('consultas',$this->data);
 		
+	}
+
+	public function get_enf() {
+
 	}
 	
 	

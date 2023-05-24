@@ -15,7 +15,7 @@ class MY_Controller extends CI_Controller {
             "medicos" => base_url("medicos"),
             "utentes" => base_url("utentes"),
             "enfermeiros" =>base_url("enfermeiros"),
-            "consultas" =>"#",
+            "consultas" =>base_url("consultas"),
             "login" => base_url("login"),
             "logout" => base_url("logout"),
             "email" => base_url("email")

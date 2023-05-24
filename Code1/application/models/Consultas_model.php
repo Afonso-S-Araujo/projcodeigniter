@@ -15,41 +15,69 @@ class Consultas_model extends MY_Model {
 	}
 
 	public function get_consultas($islogged,$userdata){
-		if($islogged && $userdata['tipo'] != 'admin'){
-			$this->db->select($userdata['tipo'].'.id');
-			$this->db->from($userdata['tipo']);
-			$this->db->where('idUser',$userdata['id']);
-			$result = $this->db->get()->result();
-			echo $result;
+		$result = array();
+		if($islogged){
+			if($userdata['tipo'] != 'admin'){
+				$this->db->select($userdata['tipo'].'.id');
+				$this->db->from($userdata['tipo']);
+				$this->db->where('idUser',$userdata['id']);
+				$result = $this->db->get()->result()[0];
+			}			
 		}
-		
-		if($islogged && $userdata['tipo'] != 'admin'){
-			if($userdata['tipo'] == 'enfermeiro'){
-				$this->db->select('idconsulta');
-				$this->db->where('idenfermeiro',$result['id']);
-				$consultas = $this->db->get($this->table)->result();
-			}
-		}
-		
-		$this->db->select('consultas.data,medico.nome as nomeMedico,medico.especialidade,utente.nome as nomeUtente,enfermeiro.nome as nome enfermeiro,receitas.id as idReceitas From consultas inner join enfermeiro ON enfermeiro.id in (SELECT idenfermeiro from consultas_enfermeiros where )',FALSE);
+
+		$this->db->select('consultas.id,consultas.data,consultas.hora, medico.nome AS nomeMedico, medico.especialidade, utente.nome AS nomeUtente');//,receitas.id as idReceitas
 		$this->db->from($this->table);
-		if($islogged && $userdata['tipo'] != 'admin'){
-			if($userdata['tipo'] == 'enfermeiro'){
-				//SELECT consultas.data,medico.nome as nomeMedico,medico.especialidade,utente.nome as nomeUtente,enfermeiro.nome as nomeEnfermeiro From consultas inner join enfermeiro ON enfermeiro.id in (SELECT idenfermeiro from consultas_enfermeiros where idconsulta in (1,2)) INNER JOIN medico ON medico.id = consultas.idmedico INNER JOIN utente ON utente.id = consultas.idutente;	
-			}
-			$pessoas=array('medico','utente','enfermeiro');
-			$this->db->join($userdata['tipo'],'consultas.id'.$userdata['tipo'].' = '.$userdata['id']);
-			$this->db->join($userdata['tipo'],'consultas.id'.$userdata['tipo'].' = '.$userdata['id']);
-			$this->db->where('estado',1);
-			$this->db->order_by('data','DESC');
+		
+		$this->db->join('medico','medico.id = consultas.idmedico','inner');
+		$this->db->join('utente','utente.id = consultas.idutente','inner');
+		//$this->db->join('receitas','receitas.idConsulta = consultas.id','inner');
+
+		if($islogged && $userdata['tipo'] != 'admin'){	
+			if($userdata['tipo'] =='enfermeiro'){
+				$this->db->join('consultas_enfermeiros','consultas.id = consultas_enfermeiros.idconsulta','inner');
+				$this->db->join('enfermeiro','enfermeiro.id = consultas_enfermeiros.idenfermeiro','inner');		
+			}			
+			$this->db->where($userdata['tipo'].'.id',$result->id);
+			$this->db->where('consultas.estado',1); //mudar 1 para filtro			
 		}else{
+			if(!$islogged){
+				$this->db->where('consultas.data',date("Y/m/d")); 	
+			}
 
 		}
-			
+		$this->db->order_by('consultas.data','ASC');	
 
-
-		return $this->db->get()->result();
+		$consultas=$this->db->get()->result();
+		//var_dump($consultas);
+		return $consultas;
 
 	}
 
+	function get_byConsulta($idConsulta){
+		$subquery = $this->db->select('idenfermeiro')
+                    ->from('consultas_enfermeiros')
+                    ->where('idconsulta = '.$idConsulta)
+                    ->get_compiled_select();
+
+		$query = $this->db->select('nome')
+                  ->from('enfermeiro')
+                  ->where_in('id', $subquery, false)
+                  ->get();
+		return $query;
+	}
+	
+
 }
+/*SELECT consultas.id, consultas.data, consultas.hora, medico.nome AS nomeMedico, medico.especialidade, utente.nome AS nomeUtente 
+FROM consultas 
+INNER JOIN consultas_enfermeiros ON consultas.id = consultas_enfermeiros.idconsulta 
+INNER JOIN enfermeiro ON enfermeiro.id = consultas_enfermeiros.idenfermeiro 
+INNER JOIN medico ON medico.id = consultas.idmedico 
+INNER JOIN utente ON utente.id = consultas.idutente ORDER BY consultas.data DESC;
+
+SELECT consultas.data, medico.nome AS nomeMedico, medico.especialidade, utente.nome AS nomeUtente, enfermeiro.nome AS nomeEnfermeiro
+FROM consultas
+INNER JOIN consultas_enfermeiros ON consultas.id = consultas_enfermeiros.idconsulta
+INNER JOIN enfermeiro ON enfermeiro.id = consultas_enfermeiros.idenfermeiro
+INNER JOIN medico ON medico.id = consultas.idmedico
+INNER JOIN utente ON utente.id = consultas.idutente;*/

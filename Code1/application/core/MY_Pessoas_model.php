@@ -23,7 +23,7 @@ class MY_Pessoas_model extends MY_Model {
 		if(is_array($collumns))
 			$this->db->select(implode(',',$collumns));
 		else{
-			print_r($jointableCols);
+			
 			// prepara as colunas para o select 
 			for($i = 0;$i < count($jointableCols);$i++)
 				$jointableCols[$i] = $jointable.'.'.$jointableCols[$i];
@@ -34,7 +34,7 @@ class MY_Pessoas_model extends MY_Model {
 			$this->db->join($jointable,$this->table.'.id'.$jointable.' = '.$jointable.'.id','inner');
 		$this->db->limit($limit, $start);
 		$query = $this->db->get();
-		echo $this->db->last_query();
+		
 		return $query->result();
 	}
 	

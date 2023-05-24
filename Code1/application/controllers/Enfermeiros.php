@@ -44,7 +44,7 @@ class Enfermeiros extends MY_Controller {
 	        'lista' => $listaEnfermeiros,
 	        'links' => $this->pagination->create_links()
 	    ];
-		//print_r($listaEnfermeiros);
+		
 		$this->data = array_merge($this->data,$data);
 		$this->data['isLoggedIn'] = $this->login_lib->islogged;
 		$this->mustache->render('funcionarios',$this->data);

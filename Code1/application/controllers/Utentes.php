@@ -44,7 +44,7 @@ class Utentes extends MY_Controller {
 	        'listaUtentes' => $listaUtentes,
 	        'links' => $this->pagination->create_links()
 	    ];
-		//print_r($listautentes);
+		
 		$this->data = array_merge($this->data,$data);
 		$this->data['isLoggedIn'] = $this->login_lib->islogged;
 		$this->mustache->render('utentes',$this->data);
