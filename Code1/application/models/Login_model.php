@@ -19,23 +19,7 @@ class Login_model extends CI_Model {
 			return $query->row_array();
 		return false;
 	}
-	public function isLoggedIn(){
-		
-		//logged_in
-		// $logged_in = $_SESSION['logged_in'];
-		// $logged_in = $this->session->logged_in;
-		$logged_in = $this->session->userdata('logged_in');
-		$user = $this->session->userdata('user');
-		if($logged_in){
-			$this->createSession($user);
-			return true;
-		}
-		return false;
-	}
-	public function createSession($user_data){
-		
-		$this->session->set_userdata(array('logged_in' =>TRUE, 'user'=>$user_data));
-	}
+	
 	
 	public function checkPassword($password,$hashed_password) {
 		return $this->phpass->CheckPassword($password, $hashed_password);

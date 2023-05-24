@@ -1,15 +1,17 @@
 <?
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login {
+class Login_lib {
 
 	private $CI;
 
+	public $islogged;
+
     function __construct(){
-		echo "bomba";
 		$this->CI =& get_instance();
 		
 		$this->CI->load->library('session');
+		$this->islogged = $this->isLoggedIn();
     }
 
     public function isLoggedIn(){

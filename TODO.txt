@@ -1,3 +1,5 @@
+-lognin ta todo mal falta fazer as listas alem de medicos
+
 -No CREATE da CONSULTA usar 3 grupos de inputs:
 
 1º grupo terá os seguintes atributos <input type="radio" name = "utente" value ="id">
@@ -15,3 +17,9 @@
 - Na criação de qualquer tipo de pessoa ter o opçao de criar como user (dar possibilidade de login) uma checkbox se checked javascript cria txtInputs user name e password
 
 
+CREATE utente 
+INSERT INTO `users` (`id`, `nome`, `nif`, `nib`, `especialidade`, `idmorada`, `nUtente`, `tipo`, `username`, `password`) VALUES (NULL, 'Sr.Danilo Pereira', NULL, NULL, NULL, 1, '999666444', 'utente', '', '');
+
+coaglkfssxpwygxo
+
+select medicos - consultas -receitas select enfermeiros where ...

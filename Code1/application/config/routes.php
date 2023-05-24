@@ -54,9 +54,18 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['medicos/(:num)'] = 'medicos/index/$1';
+
+$route['enfermeiros/(:num)'] = 'enfermeiros/index/$1';
+
+$route['utentes/(:num)'] = 'utentes/index/$1';
+
 $route['home'] = 'Root';
 //login
 $route['login'] = 'Login/login';
+$route['logout'] = 'Login/logout';
 
+$route['email'] = 'Email';
+
+$route['emailsend'] = 'Email/send';
 // Pagination
 $route['clientes/(:num)'] = "Clientes";

@@ -13,10 +13,12 @@ class MY_Controller extends CI_Controller {
         $data =[
             "home" => base_url("home"),
             "medicos" => base_url("medicos"),
-            "utentes" => "#",
-            "enfermeiros" =>"#",
+            "utentes" => base_url("utentes"),
+            "enfermeiros" =>base_url("enfermeiros"),
             "consultas" =>"#",
-            "login" => base_url("login")
+            "login" => base_url("login"),
+            "logout" => base_url("logout"),
+            "email" => base_url("email")
         ];
         $this->data['css'] = base_url("resources/css/home.css");
 		$this->data['imgNav'] = base_url("resources/img/crossbig.png");

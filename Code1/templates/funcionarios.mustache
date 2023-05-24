@@ -1,0 +1,34 @@
+
+
+		<div id="container">
+			<h1>{{header_h1}}</h1>
+			<div>
+				<table>
+					<thead>
+						<tr>
+							<th>NOME</th>
+							<th>Especialidade</th>
+							{{#isLoggedIn}}
+								<th>nif</th>
+								<th>nib</th>
+								<th>morada</th>
+							{{/isLoggedIn}}
+						</tr>
+					</thead>
+					<tbody>
+						{{#lista}}
+						<tr> 
+							<td>{{nome}}</td>
+							<td>{{especialidade}}</td>
+							{{#isLoggedIn}}
+								<td>{{nif}}</td>
+								<td>{{nib}}</td>
+								<td>{{cidade}}</td>
+							{{/isLoggedIn}}
+						</tr>
+						{{/lista}}
+					</tbody>
+				</table>
+				<p>{{{links}}}</p>
+			</div>
+		</div>

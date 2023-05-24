@@ -7,26 +7,22 @@
 					<thead>
 						<tr>
 							<th>NOME</th>
-							<th>Especialidade</th>
+							<th>cidade</th>
 							{{#isLoggedIn}}
-								<th>nif</th>
-								<th>nib</th>
-								<th>morada</th>
+								<th>nUtente</th>								
 							{{/isLoggedIn}}
 						</tr>
 					</thead>
 					<tbody>
-						{{#listaMedicos}}
+						{{#listaUtentes}}
 						<tr> 
 							<td>{{nome}}</td>
-							<td>{{especialidade}}</td>
+							<td>{{cidade}}</td>
 							{{#isLoggedIn}}
-								<td>{{nif}}</td>
-								<td>{{nib}}</td>
-								<td>{{cidade}}</td>
+								<td>{{nUtente}}</td>
 							{{/isLoggedIn}}
 						</tr>
-						{{/listaMedicos}}
+						{{/listaUtentes}}
 					</tbody>
 				</table>
 				<p>{{{links}}}</p>

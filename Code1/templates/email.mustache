@@ -1,0 +1,23 @@
+
+
+		<div id="container">
+			<form action="{{emailsend}}" method="post" class="email-form">
+				<div>
+					<label for="from">Insira o seu email: </label>
+					<input type="text" name="para" id="para" value="{{#is_flash}} {{username}} {{/is_flash}}" required>
+				</div>
+				<div>
+					<label for="assunto">Insira assunto: </label>
+					<input type="text" name="assunto" id="assunto" required>
+				</div>
+					<label for="msg:">Insira mensagem</label>
+
+					<textarea id="msg" name="msg"
+							rows="5" cols="33">
+					</textarea>
+
+				<div>
+					<input id="submit" type="submit" value="Entrar">
+				</div>
+			</form>
+		</div>

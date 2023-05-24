@@ -71,7 +71,12 @@ body{
 body {
     font: 1rem 'Fira Sans', sans-serif;
 }
-
+#login a{
+	color:rgb(8, 0, 255);
+}
+#logout a{
+	color: red;
+}
 .footer{
 	
 	margin-bottom: 0px;

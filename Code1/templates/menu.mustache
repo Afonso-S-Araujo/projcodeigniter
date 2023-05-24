@@ -7,6 +7,12 @@
 				<li><a href="{{utentes}}">Utentes</a></li>
 				<li><a href="{{enfermeiros}}">Enfermeiros</a></li>
 				<li><a href="{{consultas}}">Consultas</a></li>
+				{{^isLoggedIn}}
+					<li id="login"><a href="{{login}}">Log-in</a></li>	
+				{{/isLoggedIn}}
+				{{#isLoggedIn}}
+					<li id="logout"><a href="{{logout}}">Log-out</a></li>
+				{{/isLoggedIn}}
 			</ul>
-			<a href="{{login}}">Log-in</a>
+			
 		</div>
