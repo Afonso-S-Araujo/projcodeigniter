@@ -1,0 +1,22 @@
+
+
+		<div id="container">
+			<form action="" method="POST">
+			
+				<label for="username">Username:</label>
+				<input type="text" id="username" name="username" required><br><br>
+				
+				<label for="password">Password:</label>
+				<input type="password" id="password" name="password" required><br><br>
+				
+				<label for="tipo">Tipo:</label>
+				<select id="tipo" name="tipo" required>						
+					<option {{adminselect}} value="admin">admin</option>
+					<option {{medicoselect}} value="medico">medico</option>
+					<option {{enfermeiroselect}} value="enfermeiro">enfermeiro</option>
+					<option {{utenteselect}} value="utente">utente</option>
+				</select><br><br>
+			
+				<input type="submit" value="Enviar">
+			</form>
+		</div>

@@ -37,7 +37,7 @@ class Enfermeiros extends MY_Controller {
 			$jointableCols = array('cidade');
 			$collumns = '*';
 		}
-		$listaEnfermeiros = $this->Enfermeiros_model->getByType($jointableCols,$jointable,$collumns,$config['per_page'],$page);
+		$listaEnfermeiros = $this->Enfermeiros_model->getByType($collumns,$jointableCols,$jointable,$config['per_page'],$page);
 		//para o template
 		$data = [
 	        'header_h1' => 'Enfermeiros',

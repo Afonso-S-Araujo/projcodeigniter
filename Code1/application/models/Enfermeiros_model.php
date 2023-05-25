@@ -8,7 +8,7 @@ class Enfermeiros_model extends MY_Pessoas_model {
 	
 	function __construct(){
 		parent::__construct();
-		$this->table = 'enfermeiro';
+		$this->table = 'enfermeiros';
 		
 	}
 

@@ -8,7 +8,7 @@ class Medicos_model extends MY_Pessoas_model {
 	
 	function __construct(){
 		parent::__construct();
-		$this->table = 'medico';
+		$this->table = 'medicos';
 	}
 
 	

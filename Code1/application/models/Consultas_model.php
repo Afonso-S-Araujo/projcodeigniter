@@ -25,17 +25,17 @@ class Consultas_model extends MY_Model {
 			}			
 		}
 
-		$this->db->select('consultas.id,consultas.data,consultas.hora, medico.nome AS nomeMedico, medico.especialidade, utente.nome AS nomeUtente');//,receitas.id as idReceitas
+		$this->db->select('consultas.id,consultas.data,consultas.hora, medicos.nome AS nomeMedico, medicos.especialidade, utentes.nome AS nomeUtente');//,receitas.id as idReceitas
 		$this->db->from($this->table);
 		
-		$this->db->join('medico','medico.id = consultas.idmedico','inner');
-		$this->db->join('utente','utente.id = consultas.idutente','inner');
+		$this->db->join('medicos','medicos.id = consultas.idmedico','inner');
+		$this->db->join('utentes','utentes.id = consultas.idutente','inner');
 		//$this->db->join('receitas','receitas.idConsulta = consultas.id','inner');
 
 		if($islogged && $userdata['tipo'] != 'admin'){	
 			if($userdata['tipo'] =='enfermeiro'){
 				$this->db->join('consultas_enfermeiros','consultas.id = consultas_enfermeiros.idconsulta','inner');
-				$this->db->join('enfermeiro','enfermeiro.id = consultas_enfermeiros.idenfermeiro','inner');		
+				$this->db->join('enfermeiros','enfermeiros.id = consultas_enfermeiros.idenfermeiro','inner');		
 			}			
 			$this->db->where($userdata['tipo'].'.id',$result->id);
 			$this->db->where('consultas.estado',1); //mudar 1 para filtro			
@@ -60,7 +60,7 @@ class Consultas_model extends MY_Model {
                     ->get_compiled_select();
 
 		$query = $this->db->select('nome')
-                  ->from('enfermeiro')
+                  ->from('enfermeiros')
                   ->where_in('id', $subquery, false)
                   ->get();
 		return $query;

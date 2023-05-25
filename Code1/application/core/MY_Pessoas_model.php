@@ -18,7 +18,7 @@ class MY_Pessoas_model extends MY_Model {
 		jointable	-> tabela do inner join
 		collumns -> colunas que quero selecionar da tabela principal
 	*/
-	public function getByType($jointableCols,$jointable,$collumns,$limit, $start){
+	public function getByType($collumns,$jointableCols = "",$jointable = false,$limit =null , $start = null){
 		
 		if(is_array($collumns))
 			$this->db->select(implode(',',$collumns));
@@ -31,7 +31,7 @@ class MY_Pessoas_model extends MY_Model {
 		}
 		$this->db->from($this->table);
 		if($jointable)
-			$this->db->join($jointable,$this->table.'.id'.$jointable.' = '.$jointable.'.id','inner');
+			$this->db->join($jointable,$this->table.'.id'.$jointable.' = '.$jointable.'.id','inner');		
 		$this->db->limit($limit, $start);
 		$query = $this->db->get();
 		

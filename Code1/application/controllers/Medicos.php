@@ -38,7 +38,7 @@ class Medicos extends MY_Controller {
 			$jointableCols = array('cidade');
 			$collumns = '*';
 		}
-		$listaMedicos = $this->Medicos_model->getByType($jointableCols,$jointable,$collumns,$config['per_page'],$page);
+		$listaMedicos = $this->Medicos_model->getByType($collumns,$jointableCols,$jointable,$config['per_page'],$page);
 		//para o template
 		$data = [
 	        'header_h1' => 'Medicos',

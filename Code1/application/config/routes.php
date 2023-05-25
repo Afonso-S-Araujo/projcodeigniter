@@ -67,7 +67,11 @@ $route['home'] = 'Root';
 $route['login'] = 'Login/login';
 $route['logout'] = 'Login/logout';
 
+$route['usercreate'] ='Users/insert';
 
+$route['deleteuser/(:num)'] = 'Users/delete/$1';
+
+$route['edituser/(:num)'] = 'Users/update/$1';
 
 $route['consulta_enfermeiro/(:num)/(:num)'] = 'Consulta/get_enf/$1/$2';
 $route['email'] = 'Email';

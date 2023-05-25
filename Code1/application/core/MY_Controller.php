@@ -26,6 +26,7 @@ class MY_Controller extends CI_Controller {
             "email" => base_url("email"),
             "users" => base_url("users")
         ];
+        $this->load->library('validation');
         $this->data['css'] = base_url("resources/css/home.css");
 		$this->data['imgNav'] = base_url("resources/img/crossbig.png");
         $this->data = array_merge($this->data,$data);
@@ -33,59 +34,85 @@ class MY_Controller extends CI_Controller {
 	}
 	
     
-    public function Save(){
-        $contatos = $this->contatos_model->GetAll('nome');
-        $dados['contatos'] =$this->contatos_model->Modelar($contatos);
+    public function insert(){
         
-        $validacao = self::Validation();
+        $validacao = $this->validation->validation('insert',$this->data['title']);
         if($validacao){
-            $contato = $this->input->post();
-            $status = $this->contatos_model->Insert($contato);
+            $data = $this->input->post();
+            if($this->data['title'] == 'Users'){
+                $check = $this->{$this->data['title']."_model"}->check_user($data['username']);
+                if($check){
+                    $this->session->set_flashdata('error', 'Não foi possível inserir o contato.');
+                    redirect(base_url('home'));
+                }
+                $data['password'] = $this->passwordhash->HashPassword($data['password']);
+            }
+                
+            $status = $this->{$this->data['title']."_model"}->insert($data);
             if(!$status)
                 $this->session->set_flashdata('error', 'Não foi possível inserir o contato.');
-             else{
+            else{
                 $this->session->set_flashdata('success', 'Contato inserido com sucesso.');
-    
-                redirect('base', 'refresh');
+                redirect(base_url($this->data['title']), 'refresh');
+
             }
         }else
             $this->session->set_flashdata('error',validation_errors('<p>','</p>'));
-        $this->load->view('home_editar',$dados);
+        $this->mustache->render('users_form',$this->data);
     }
     
-    public function Edit(){
-        $id = $this->uri->segment(2);
-        if(is_null($id))
-            redirect('base', 'refresh');
-        $dados['contato'] = $this->contatos_model->GetById($id);
-        $this->load->view('editar', $dados);
-    }
 
-    public function Update(){
-        $validacao = self::Validation('update');
+    public function update($id){
+        //$id = $this->uri->segment(3);
+        if(is_null($id))
+            redirect(base_url($this->data['title']), 'refresh');
+        $this->data['listaForm'] = $this->{$this->data['title']."_model"}->GetById($id);
+        if($this->data['title'] == 'Users')
+            $this->data[$this->data['listaForm']['tipo'].'select'] = 'selected';
+        
+        $validacao = $this->validation->validation('update',$this->data['title']);
         if($validacao){
             $form = $this->input->post();
-            $status = $this->contatos_model->Update($form['id'], $form);
+            if($this->data['title'] == 'Users')
+                $form['password'] = $this->passwordhash->HashPassword($form['password']);                
+            $status = $this->{$this->data['title']."_model"}->update($id, $form);
             if(!$status){
                 $this->session->set_flashdata('error', 'Não atualizado com sucesso.');
-                redirect('base', 'refresh');
+                redirect(base_url($this->data['title']), 'refresh');
             }else{
                 $this->session->set_flashdata('sucess', 'Contato atualizado com sucesso.');
-                redirect('base', 'refresh');
+                redirect(base_url($this->data['title']), 'refresh');
             }
         }
+        $this->mustache->render('usersedit_form',$this->data);
     }
-    public function Delete(){
-        $id = $this->uri->segment(2);
+
+    public function delete($id){
+        //$id = $this->uri->segment(3);
         if(is_null($id))
-            redirect('base', 'refresh');
-        $status = $this->contatos_model->Delete($id);
+            redirect(base_url($this->data['title']), 'refresh');            
+        $status = $this->{$this->data['title']."_model"}->delete($id);
         if(!$status){
             $this->session->set_flashdata('error', 'Não apagado');
-            redirect('base', 'refresh');
+            redirect(base_url($this->data['title']), 'refresh');
         }else{
+            if($this->data['title'] == 'Users'){
+                $tipos = array('Medicos','Utentes','Enfermeiros');
+
+                foreach($tipos as $tipo){
+                    $check = $this->{$this->data['title']."_model"}->check_pessoa($tipo,$id);
+                    if($check){
+                        $iduser = array('idUser' => null);
+                        echo $check->id;
+                        $this->{$this->data['title']."_model"}->updateByType($tipo,$check->id, $iduser);
+                        break;
+                    }   
+                }
+
+                             
+            }  
             $this->session->set_flashdata('sucess', 'Contato apagado com sucesso.');
-            redirect('base', 'refresh');
+            redirect(base_url($this->data['title']), 'refresh');
         }
     }
     

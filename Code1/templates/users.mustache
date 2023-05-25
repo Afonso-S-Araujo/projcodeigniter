@@ -9,6 +9,7 @@
 							<th>id</th>
 							<th>nome</th>
 							<th>tipo</th>
+							<th>options</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -16,11 +17,13 @@
 						<tr>
 							<td>{{id}}</td> 
 							<td>{{username}}</td>
-							<td>{{tipo}}</td>							
+							<td>{{tipo}}</td>
+							<td><a href="{{edit_url}}/{{id}}">editar</a>  |  <a href="{{delete_url}}/{{id}}">eliminar</a></td>																																	
 						</tr>
 						{{/lista}}
 					</tbody>
 				</table>
 				<p class="links">{{{links}}}</p>
 			</div>
+			<a href="{{usercreate}}">criar user</a>
 		</div>

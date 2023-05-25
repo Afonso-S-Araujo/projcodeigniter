@@ -10,7 +10,7 @@ class Utentes extends MY_Controller {
 		$this->load->library('pagination');
 		$this->load->model('Utentes_model');
 
-		$this->data['title'] = "utentes";
+		$this->data['title'] = "Utentes";
 	}
 	
 	
@@ -38,7 +38,7 @@ class Utentes extends MY_Controller {
 			$jointableCols = array('cidade');
 			$collumns = '*';
 		}
-		$listaUtentes = $this->Utentes_model->getByType($jointableCols,$jointable,$collumns,$config['per_page'],$page);
+		$listaUtentes = $this->Utentes_model->getByType($collumns,$jointableCols,$jointable,$config['per_page'],$page);
 		//para o template
 		$data = [
 	        'header_h1' => 'utentes',

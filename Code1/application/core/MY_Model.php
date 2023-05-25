@@ -13,7 +13,7 @@ abstract class MY_Model extends CI_Model {
 	
 	
 	// return boolean rec. array
-	public function Insert($data){
+	public function insert($data){
 		if(!isset($data))
 			return false;
 			// insert(table, data)
@@ -49,17 +49,25 @@ abstract class MY_Model extends CI_Model {
 	$data Dados a serem inseridos
 	returna boolean
   */
-	 function Update($id, $data) {
+	function update($id, $data) {
 		if(is_null($id) || !isset($data))
 			return false;
 		$this->db->where('id', $id);
 		return $this->db->update($this->table, $data);
 	 }
+
+	 
+	 function updateByType($tipo,$id, $data) {
+		if(is_null($id) || !isset($data))
+			return false;
+		$this->db->where('id', $id);
+		return $this->db->update($tipo, $data);
+	 }
 	/* Remove um registo na tabela
 	$int ID do registo a ser eliminado
 	returna boolean
   */
-   function Delete($id) {
+   function delete($id) {
     if(is_null($id))
       return false;
 	$this->db->where('id', $id);

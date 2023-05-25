@@ -8,7 +8,7 @@ class Utentes_model extends MY_Pessoas_model {
 	
 	function __construct(){
 		parent::__construct();
-		$this->table = 'utente';
+		$this->table = 'utentes';
 	}
 
 	

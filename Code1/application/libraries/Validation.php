@@ -11,22 +11,25 @@ class Validation {
 		$this->CI->load->library('form_validation');
     }
 
-    private function Validation($operacao = 'insert'){
+    public function validation($operacao,$table){
         switch($operacao){
             case 'insert':
-                $rules['nome'] = array('trim', 'required', 'min_length[3]');
-                $rules['email'] = array('trim', 'required', 'valid_email', 'is_unique[contatos.email]');
+                if($table == 'Users'){
+                    $this->CI->form_validation->set_rules('username', 'Nome', array('trim', 'required', 'min_length[3]'));
+                    $this->CI->form_validation->set_rules('password', 'senha', array('trim', 'required'));                
+                }
                 break;
             case 'update':
-                $rules['nome'] = array('trim', 'required', 'min_length[3]');
-                $rules['email'] = array('trim', 'required', 'valid_email');
+                if($table == 'Users'){
+                    $this->CI->form_validation->set_rules('username', 'Nome', array('trim', 'required', 'min_length[3]'));
+                    $this->CI->form_validation->set_rules('password', 'senha', array('trim', 'required'));                
+                }
                 break;
             default:
                 $rules['nome'] = array('trim', 'required', 'min_length[3]');
         }
-        $this->form_validation->set_rules('nome', 'Nome', $rules['nome']);
-        $this->form_validation->set_rules('email', 'Email', $rules['email']);
-        return $this->form_validation->run();
+        
+        return $this->CI->form_validation->run();
     }
 }
 ?>
