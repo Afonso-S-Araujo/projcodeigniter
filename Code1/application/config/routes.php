@@ -61,6 +61,7 @@ $route['utentes/(:num)'] = 'utentes/index/$1';
 
 $route['consultas/(:num)'] = 'Consulta/index/$1';
 
+$route['users'] = 'Users/index/$1';
 $route['home'] = 'Root';
 //login
 $route['login'] = 'Login/login';

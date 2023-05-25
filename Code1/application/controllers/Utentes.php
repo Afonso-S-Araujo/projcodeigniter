@@ -15,6 +15,7 @@ class Utentes extends MY_Controller {
 	
 	
 	public function index(){
+		
 		//config do paginador
 		$config = array();
 		$config['base_url'] = base_url()."utentes/index";

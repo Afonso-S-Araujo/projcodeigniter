@@ -1,0 +1,26 @@
+
+
+		<div id="container">
+			<h1>{{header_h1}}</h1>
+			<div>
+				<table>
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>nome</th>
+							<th>tipo</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#lista}}
+						<tr>
+							<td>{{id}}</td> 
+							<td>{{username}}</td>
+							<td>{{tipo}}</td>							
+						</tr>
+						{{/lista}}
+					</tbody>
+				</table>
+				<p class="links">{{{links}}}</p>
+			</div>
+		</div>

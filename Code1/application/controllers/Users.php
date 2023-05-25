@@ -1,25 +1,33 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Medicos extends MY_Controller {
+class Users extends MY_Controller {
 	
 	function __construct(){
 		parent::__construct();
 		$this->load->helper('url');
 		//TODO: passar coisas que são carregadas sempre para o autoloader
 		$this->load->library('pagination');
-		$this->load->model('Medicos_model');
+		$this->load->model('Users_model');
 
-		$this->data['title'] = "Medicos";
+		$this->data['title'] = "Users";
 	}
 	
 	
 	public function index(){
-		
+		if(!$this->login_lib->islogged){
+			redirect(base_url('home'));
+			return;
+		}else{
+			if($this->session->userdata('user')['tipo'] != 'admin'){
+				redirect(base_url('home'));
+				return;
+			}
+		}
 		//config do paginador
 		$config = array();
-		$config['base_url'] = base_url()."Medicos/index";
-		$config['total_rows'] = $this->Medicos_model->get_count();
+		$config['base_url'] = base_url()."Users/index";
+		$config['total_rows'] = $this->Users_model->get_count();
 		$config['per_page'] = 3;
 
 		//criação do paginador e select à base de dados
@@ -29,26 +37,22 @@ class Medicos extends MY_Controller {
 
 		//verificação de login muda o select
 		
-		if(!$this->login_lib->islogged){
-			$jointable = false;
-			$jointableCols = "";
-			$collumns = array('nome','especialidade');
-		}else{			
-			$jointable = 'morada';
-			$jointableCols = array('cidade');
-			$collumns = '*';
-		}
-		$listaMedicos = $this->Medicos_model->getByType($jointableCols,$jointable,$collumns,$config['per_page'],$page);
+		
+		$jointable = false;
+		$jointableCols = "";
+		$collumns = array('id,username,tipo');
+		
+		$listaUsers = $this->Users_model->getByType($jointableCols,$jointable,$collumns,$config['per_page'],$page);
 		//para o template
 		$data = [
-	        'header_h1' => 'Medicos',
-	        'lista' => $listaMedicos,
+	        'header_h1' => 'Users',
+	        'lista' => $listaUsers,
 	        'links' => $this->pagination->create_links()
 	    ];
 		
 		$this->data = array_merge($this->data,$data);
 		$this->data['isLoggedIn'] = $this->login_lib->islogged;
-		$this->mustache->render('funcionarios',$this->data);
+		$this->mustache->render('users',$this->data);
 		
 	}
 	
