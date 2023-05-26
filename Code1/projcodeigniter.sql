@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24-Maio-2023 às 22:52
--- Versão do servidor: 10.4.21-MariaDB
--- versão do PHP: 8.0.12
+-- Tempo de geração: 26-Maio-2023 às 08:56
+-- Versão do servidor: 10.4.28-MariaDB
+-- versão do PHP: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,7 +34,7 @@ CREATE TABLE `consultas` (
   `data` date NOT NULL,
   `hora` time NOT NULL,
   `estado` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1 =ativo; 0 = encerrado'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `consultas`
@@ -53,7 +53,7 @@ INSERT INTO `consultas` (`id`, `idmedico`, `idutente`, `data`, `hora`, `estado`)
 CREATE TABLE `consultas_enfermeiros` (
   `idconsulta` int(11) NOT NULL,
   `idenfermeiro` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `consultas_enfermeiros`
@@ -66,10 +66,10 @@ INSERT INTO `consultas_enfermeiros` (`idconsulta`, `idenfermeiro`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `enfermeiro`
+-- Estrutura da tabela `enfermeiros`
 --
 
-CREATE TABLE `enfermeiro` (
+CREATE TABLE `enfermeiros` (
   `id` int(11) NOT NULL,
   `nome` varchar(80) NOT NULL,
   `especialidade` varchar(80) NOT NULL,
@@ -77,13 +77,13 @@ CREATE TABLE `enfermeiro` (
   `nib` varchar(25) NOT NULL,
   `idMorada` int(11) NOT NULL,
   `idUser` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `enfermeiro`
+-- Extraindo dados da tabela `enfermeiros`
 --
 
-INSERT INTO `enfermeiro` (`id`, `nome`, `especialidade`, `nif`, `nib`, `idMorada`, `idUser`) VALUES
+INSERT INTO `enfermeiros` (`id`, `nome`, `especialidade`, `nif`, `nib`, `idMorada`, `idUser`) VALUES
 (2, 'Dorita Sousa', 'Pediatria', 987654377, '318208674707166184089', 3, 3),
 (3, 'Marta gouveia', 'Pediatria', 987654377, '318208674707166184089', 3, NULL),
 (19, 'Rui Alves', 'Cardiologia', 123456789, '987654321098765432109', 1, NULL),
@@ -98,10 +98,10 @@ INSERT INTO `enfermeiro` (`id`, `nome`, `especialidade`, `nif`, `nib`, `idMorada
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `medico`
+-- Estrutura da tabela `medicos`
 --
 
-CREATE TABLE `medico` (
+CREATE TABLE `medicos` (
   `id` int(11) NOT NULL,
   `idUser` int(11) DEFAULT NULL,
   `nome` varchar(80) NOT NULL,
@@ -109,13 +109,13 @@ CREATE TABLE `medico` (
   `nif` int(9) NOT NULL,
   `nib` varchar(25) NOT NULL,
   `idMorada` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `medico`
+-- Extraindo dados da tabela `medicos`
 --
 
-INSERT INTO `medico` (`id`, `idUser`, `nome`, `especialidade`, `nif`, `nib`, `idMorada`) VALUES
+INSERT INTO `medicos` (`id`, `idUser`, `nome`, `especialidade`, `nif`, `nib`, `idMorada`) VALUES
 (1, NULL, 'João Silva', 'Cardiologia', 123456789, '123456789012345678901', 1),
 (2, NULL, 'Marta Santos', 'Pediatria', 987654321, '098765432109876543210', 2),
 (3, NULL, 'Carlos Almeida', 'Ortopedia', 456789123, '456789123045678912304', 3),
@@ -135,7 +135,7 @@ INSERT INTO `medico` (`id`, `idUser`, `nome`, `especialidade`, `nif`, `nib`, `id
 CREATE TABLE `morada` (
   `id` int(11) NOT NULL,
   `cidade` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `morada`
@@ -158,7 +158,7 @@ CREATE TABLE `produtos` (
   `nome` varchar(40) NOT NULL,
   `forma` varchar(50) NOT NULL COMMENT 'como tomar',
   `embalagem` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -171,7 +171,7 @@ CREATE TABLE `produtos_receita` (
   `idReceita` int(11) NOT NULL,
   `posologia` varchar(255) NOT NULL COMMENT 'a forma de utilizar os medicamentos',
   `num` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -184,7 +184,7 @@ CREATE TABLE `receitas` (
   `cuidado` varchar(100) NOT NULL,
   `receita` varchar(7655) DEFAULT NULL,
   `idConsulta` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -197,7 +197,7 @@ CREATE TABLE `users` (
   `username` varchar(30) NOT NULL,
   `password` varchar(40) NOT NULL,
   `tipo` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `users`
@@ -212,22 +212,22 @@ INSERT INTO `users` (`id`, `username`, `password`, `tipo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `utente`
+-- Estrutura da tabela `utentes`
 --
 
-CREATE TABLE `utente` (
+CREATE TABLE `utentes` (
   `id` int(11) NOT NULL,
   `nUtente` int(9) NOT NULL,
   `idMorada` int(11) NOT NULL,
   `nome` varchar(80) NOT NULL,
   `idUser` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `utente`
+-- Extraindo dados da tabela `utentes`
 --
 
-INSERT INTO `utente` (`id`, `nUtente`, `idMorada`, `nome`, `idUser`) VALUES
+INSERT INTO `utentes` (`id`, `nUtente`, `idMorada`, `nome`, `idUser`) VALUES
 (1, 999666444, 2, 'Sr. Danilo Pereira', 4),
 (2, 123456789, 1, 'Sra. Ana Silva', NULL),
 (3, 987654321, 4, 'Sr. Carlos Almeida', NULL),
@@ -249,15 +249,15 @@ ALTER TABLE `consultas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `enfermeiro`
+-- Índices para tabela `enfermeiros`
 --
-ALTER TABLE `enfermeiro`
+ALTER TABLE `enfermeiros`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `medico`
+-- Índices para tabela `medicos`
 --
-ALTER TABLE `medico`
+ALTER TABLE `medicos`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `idUser` (`idUser`);
 
@@ -288,9 +288,9 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- Índices para tabela `utente`
+-- Índices para tabela `utentes`
 --
-ALTER TABLE `utente`
+ALTER TABLE `utentes`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `idUser` (`idUser`);
 
@@ -305,15 +305,15 @@ ALTER TABLE `consultas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de tabela `enfermeiro`
+-- AUTO_INCREMENT de tabela `enfermeiros`
 --
-ALTER TABLE `enfermeiro`
+ALTER TABLE `enfermeiros`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT de tabela `medico`
+-- AUTO_INCREMENT de tabela `medicos`
 --
-ALTER TABLE `medico`
+ALTER TABLE `medicos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
@@ -341,9 +341,9 @@ ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de tabela `utente`
+-- AUTO_INCREMENT de tabela `utentes`
 --
-ALTER TABLE `utente`
+ALTER TABLE `utentes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
