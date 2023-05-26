@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 26-Maio-2023 às 08:56
+-- Tempo de geração: 26-Maio-2023 às 11:51
 -- Versão do servidor: 10.4.28-MariaDB
 -- versão do PHP: 8.1.17
 
@@ -195,7 +195,7 @@ CREATE TABLE `receitas` (
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(40) NOT NULL,
+  `password` text NOT NULL,
   `tipo` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -204,10 +204,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `tipo`) VALUES
-(1, 'admin', 'adpexzg3FUZAk', 'admin'),
-(2, 'ana', 'adpexzg3FUZAk', 'medico'),
-(3, 'dorita', 'adpexzg3FUZAk', 'enfermeiro'),
-(4, 'danilo', 'adpexzg3FUZAk', 'utente');
+(1, 'admin', '$2a$08$uK0b9nlLGaku89o.DS8X5OMMqUHySuDq.yTJtoZzg7r3yjMVO3PAW', 'admin'),
+(2, 'ana', '$2a$08$9RXahfQ6Qqdu684Zxa87Cuy80.Q7DUzBf9kygvKVALbRLdp03TLG6', 'medico'),
+(3, 'dorita', '$2a$08$Y3fkFf/c0mypC53CCJFpYukwhZR1l/34eerbqdTa2rogPeENCdb5m', 'enfermeiro'),
+(4, 'danilo', '$2a$18$wMMSSMMNqEsny.42kAnBleOB4eLK//ZEbzyO/7DqN0O.SjvByiM.u', 'utente'),
+(5, 'afonso', '$2a$08$Bn0q4I8DoJk6HNv1GseLLuu6vpWN6qk1tVmF6YTM0FDc4yzsekfOO', 'admin');
 
 -- --------------------------------------------------------
 
@@ -338,7 +339,7 @@ ALTER TABLE `receitas`
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `utentes`
