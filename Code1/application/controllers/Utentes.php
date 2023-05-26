@@ -32,7 +32,7 @@ class Utentes extends MY_Controller {
 		if(!$this->login_lib->islogged){
 			$jointable = 'morada';
 			$jointableCols = array('cidade');
-			$collumns = array('nome');
+			$collumns = array('nome,cidade');
 		}else{			
 			$jointable = 'morada';
 			$jointableCols = array('cidade');

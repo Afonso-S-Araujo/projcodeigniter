@@ -249,12 +249,14 @@ class PasswordHash {
 
 	function CheckPassword($password, $stored_hash)
 	{
-		echo "entrou";
+		
 		$hash = $this->crypt_private($password, $stored_hash);
 		if ($hash[0] == '*')
 			$hash = crypt($password, $stored_hash);
 
 		echo $hash;
+		echo "||||||||";
+		echo $stored_hash;
 		return $hash == $stored_hash;
 	}
 }

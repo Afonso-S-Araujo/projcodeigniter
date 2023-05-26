@@ -20,14 +20,15 @@ class MY_Pessoas_model extends MY_Model {
 	*/
 	public function getByType($collumns,$jointableCols = "",$jointable = false,$limit =null , $start = null){
 		
-		if(is_array($collumns))
+		if(is_array($collumns)){
 			$this->db->select(implode(',',$collumns));
-		else{
-			
 			// prepara as colunas para o select 
-			for($i = 0;$i < count($jointableCols);$i++)
+			if($jointableCols != ""){
+				for($i = 0;$i < count($jointableCols);$i++)
 				$jointableCols[$i] = $jointable.'.'.$jointableCols[$i];
-			$this->db->select($this->table.'.*,'.implode(',',$jointableCols));
+				$this->db->select($this->table.'.*,'.implode(',',$jointableCols));
+			}
+			
 		}
 		$this->db->from($this->table);
 		if($jointable)
