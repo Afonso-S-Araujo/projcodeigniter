@@ -13,6 +13,9 @@ class Root extends MY_Controller {
 	
 	
 	public function index(){
+		if($username = $this->session->userdata('user')['username']){
+			$this->data['greet'] = $username;
+		}
 		
 		$this->data['imgHome'] = base_url("resources/img/hospital.jpg");
 		$this->data['isLoggedIn'] = $this->login_lib->islogged;
