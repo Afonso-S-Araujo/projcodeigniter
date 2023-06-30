@@ -11,6 +11,7 @@ class Medicos extends MY_Controller {
 		$this->load->model('Medicos_model');
 
 		$this->data['title'] = "Medicos";
+		$this->data['css'] = base_url("resources/css/listing.css");
 	}
 	
 	

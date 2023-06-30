@@ -8,13 +8,14 @@ class Root extends MY_Controller {
 		$this->load->helper('url');
 		
 		$this->data['title'] = "Home page";
-		$this->data['css'] = base_url("resources/css/home.css");
+		$this->data['css'] = base_url("resources/css/home_root.css");
 	}
 	
 	
 	public function index(){
-		if($username = $this->session->userdata('user')['username']){
-			$this->data['greet'] = $username;
+
+		if(isset($this->session->userdata('user')['username'])){
+			$this->data['greet'] = $this->session->userdata('user')['username'];
 		}
 		
 		$this->data['imgHome'] = base_url("resources/img/hospital.jpg");

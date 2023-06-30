@@ -9,7 +9,7 @@ class Utentes extends MY_Controller {
 		//TODO: passar coisas que são carregadas sempre para o autoloader
 		$this->load->library('pagination');
 		$this->load->model('Utentes_model');
-
+		$this->data['css'] = base_url("resources/css/listing.css");
 		$this->data['title'] = "Utentes";
 	}
 	

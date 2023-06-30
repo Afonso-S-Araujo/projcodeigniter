@@ -1,0 +1,14 @@
+.homeDiv{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  }
+  .homeDiv img{
+	display: block;
+  }
+  .success{
+	color: rgb(0, 255, 55);
+  }
+  .error{
+	color: red;
+  }
